@@ -15,7 +15,7 @@ export default class helloWorld extends Component{
   }
 render(){
   return(
-    //  Wrapped everything in Navigation Container and implemented the Stack Navigator 
+    //  Wrapped everything in Navigation Container and implemented the Stack Navigator. 
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Start'>
         <Stack.Screen name='Start' component={Start} />

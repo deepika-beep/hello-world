@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { View, Text, Button, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native';
 
-export default class Start extends Component {
+export default class Start extends React.Component {
     constructor(props) {
       super(props);
         this.state = {
@@ -27,7 +27,7 @@ export default class Start extends Component {
 
                         {/* Wrapper of the background colors section */}
                         <View>
-                            <Text>Choose background color:</Text>
+                            <Text>Choose Background Color:</Text>
                             
                             <View style={{flexDirection:'row', marginTop: 12}}>
                                 {/* the "onPress" method is used to set the "bgColor" state to a string with the hex value of the color each option represents */}
