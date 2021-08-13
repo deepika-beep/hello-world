@@ -21,10 +21,10 @@ const firebaseConfig = {
 
 }
 // Ignore warnings that aparently can't be fixed because of the third party libraries or modules
-LogBox.ignoreLogs(['Setting a timer',
-  'expo-permissions is now deprecated',
-  'Animated.event now requires a second argument for options',
-  'Animated: `useNativeDriver` was not specified. This is a required option and must be explicitly set to `true` or `false`']);
+// LogBox.ignoreLogs(['Setting a timer',
+//   'expo-permissions is now deprecated',
+//   'Animated.event now requires a second argument for options',
+//   'Animated: `useNativeDriver` was not specified. This is a required option and must be explicitly set to `true` or `false`']);
 
 export default class Chat extends React.Component {
   constructor(props) {
@@ -47,8 +47,8 @@ export default class Chat extends React.Component {
     // Reference the "messages" collection of the db
     this.referenceChatMessages = firebase.firestore().collection('messages');
     // Define the listeners for authentication and firebase updates
-    this.unsubscribe = function () { };
-    this.authUnsubscribe = function () { };
+    unsubscribe = function(){};
+    authUnsubscribe = function(){};
   }
 
   // Save messages in AsyncStorage
@@ -110,7 +110,7 @@ export default class Chat extends React.Component {
             uid: user.uid,
           });
           // Create reference to the active users messages
-          this.referenceMessagesUser = firebase.firestore().collection('messages').where('uid', '==', this.state.uid);
+          // this.referenceMessagesUser = firebase.firestore().collection('messages').where('uid', '==', this.state.uid);
           // store the uid in AsyncStorage
           // await AsyncStorage.setItem('uid', user.uid);
           // listener for updates in the collection "messages"
@@ -138,7 +138,7 @@ export default class Chat extends React.Component {
       let data = doc.data();
       messages.push({
         _id: data._id,
-        text: data.text,
+        text: data.text || '',
         createdAt: data.createdAt.toDate(),
         user: data.user,
         image: data.image || null,
@@ -153,7 +153,7 @@ export default class Chat extends React.Component {
   addMessage(message) {
     this.referenceChatMessages.add({
       _id: message._id,
-      text: message.text,
+      text: message.text || '',
       createdAt: message.createdAt,
       user: message.user,
       image: message.image || null,
@@ -180,7 +180,7 @@ export default class Chat extends React.Component {
         {...props}
         wrapperStyle={{
           right: { backgroundColor: 'blue' },
-          left: { backgroundColor: '#000' }
+          left: { backgroundColor: 'white' }
         }}
       />
     )
@@ -196,7 +196,7 @@ export default class Chat extends React.Component {
   }
   // Button inside message input that opens an ActionSheet with the features like taking a photo
   renderCustomActions = (props) => {
-    return <CustomAction {...props} />
+    return <CustomActions {...props} />
   }
 
   // Render the location in a MapView component if the user's object contains a location
